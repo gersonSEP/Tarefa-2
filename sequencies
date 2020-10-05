@@ -36,7 +36,31 @@
             2   7
             3   8
        
-3)  
+3)  CREATE TABLE `cliente` (`codigo` int(11) AUTO_INCREMENT,
+	`nome` varchar(50),
+    `endereco` varchar(40)
+    PRIMARY KEY(codigo));
+                     
+    CREATE TABLE `piloto`(`codigo` int(11) AUTO_INCREMENT,
+        `nome` varchar(50),
+        `num_voos` int(11),
+        PRIMARY KEY(codigo));
+
+    CREATE TABLE `voo`(`codigo` int(11) AUTO_INCREMENT,
+        `tipo` varchar(50),
+        `piloto` int(11),
+        `num_passageiro` int(11),
+        `distancia` 
+        PRIMARY KEY(codigo));
+
+    CREATE TABLE `milhas`(`cliente` int(11) AUTO_INCREMENT,
+        `quantidade` int(11),
+        PRIMARY KEY(cliente));
+
+    CREATE TABLE `cliente_voo`(`cliente` int(11) AUTO_INCREMENT,
+        `voo` varchar(50),
+        `classe` varchar(20),
+        PRIMARY KEY(cliente));
 
 
 
