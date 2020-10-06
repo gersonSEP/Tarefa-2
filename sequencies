@@ -98,7 +98,11 @@
 	insert into piloto(nome, num_voos)values('JJ', 0);
 	insert into voo(piloto, tipo, num_passageiros, distancia)values(1 , 'classico', '10', 100);
 
-
+7)	create trigger adicionar_passageiro after
+	insert ON cliente_voo
+	UPDATE voo 
+	SET num_passageiros = num_passageiros + 1
+	WHERE new.voo = voo.codigo;
 
 10) CREATE SEQUENCE s10 START WITH 1 INCREMENT BY 50 MINVALUE=1 MAXVALUE=1000;
 
