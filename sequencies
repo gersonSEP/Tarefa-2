@@ -36,31 +36,55 @@
             2   7
             3   8
        
-3)  CREATE TABLE `cliente` (`codigo` int(11) AUTO_INCREMENT,
-	`nome` varchar(50),
-    `endereco` varchar(40)
-    PRIMARY KEY(codigo));
-                     
-    CREATE TABLE `piloto`(`codigo` int(11) AUTO_INCREMENT,
-        `nome` varchar(50),
-        `num_voos` int(11),
-        PRIMARY KEY(codigo));
+3)  	create sequence sequencia start with 1 increment by 1;
+	create sequence sequencia2 start with 1 increment by 1;
+	create sequence sequencia3 start with 1 increment by 1;
+	create sequence sequencia4 start with 1 increment by 1;
 
-    CREATE TABLE `voo`(`codigo` int(11) AUTO_INCREMENT,
-        `tipo` varchar(50),
-        `piloto` int(11),
-        `num_passageiro` int(11),
-        `distancia` 
-        PRIMARY KEY(codigo));
+	create table passageiro(
+	    codigo int default (next value for sequencia),
+	    nome varchar(150),
+	    endereco varchar(150),
+		constraint pk_passageiro primary key(codigo)
+	);
 
-    CREATE TABLE `milhas`(`cliente` int(11) AUTO_INCREMENT,
-        `quantidade` int(11),
-        PRIMARY KEY(cliente));
+	create table piloto (
+	    codigo int default (next value for sequencia2),
+	    nome varchar(150),
+	    num_voos varchar(150),
+		constraint pk_piloto primary key(codigo)
+	);
 
-    CREATE TABLE `cliente_voo`(`cliente` int(11) AUTO_INCREMENT,
-        `voo` varchar(50),
-        `classe` varchar(20),
-        PRIMARY KEY(cliente));
+	create table voo (
+	    codigo int default (next value for sequencia3),
+	    piloto int,
+	    tipo varchar(150),
+		num_passageiros varchar(150),
+		distancia int,
+
+		foreign key (piloto) references piloto(codigo),
+		constraint pk_voo primary key(codigo)
+	);
+
+
+	create table passageiro_voo (
+	    passageiro int,
+		voo int,
+	    classe varchar(150),
+
+		foreign key (passageiro) references passageiro(codigo),
+		foreign key (voo) references voo(codigo),
+		constraint pk_passageiro_voo primary key(passageiro, voo)
+	);
+
+	create table milhas (
+	    codigo int default (next value for sequencia4),
+		passageiro int,
+		qtde int,
+
+		foreign key (passageiro) references passageiro(codigo),
+		constraint pk_milhas primary key(codigo)
+	);
 
 
 
