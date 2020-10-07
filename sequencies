@@ -95,8 +95,18 @@
 	for each row update piloto
 	set num_voos = num_voos + 1;
 
-	insert into piloto(nome, num_voos)values('JJ', 0);
+	insert into piloto(nome, num_voos)values('Alberto Rodrigues', 0);
 	insert into voo(piloto, tipo, num_passageiros, distancia)values(1 , 'classico', '10', 100);
+	
+6)	create trigger adiciona_milhas
+	after insert on passageiro_voo
+	for each row update milhas
+	set qtde = qtde +  
+	(select distancia
+	from voo, passageiro_voo
+	where new.voo = voo.codigo)/10
+	where passageiro = new.passageiro;
+
 
 7)	create trigger adicionar_passageiro after
 	insert ON cliente_voo
